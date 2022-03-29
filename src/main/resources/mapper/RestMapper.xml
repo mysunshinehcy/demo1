@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper标签要指定namespace属性，不然会报错，可看做包名-->
+<mapper namespace="com.example.demo.mapper.RestMapper">
+
+    <select id="getDemo1"  resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id  id,
+               o.type   type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+        from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo2" resultType="com.example.demo.bean.Order"  parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+             from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo3" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+         select o.id id,
+                o.type type,
+                o.name name,
+                o.create_time createDate,
+                o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo4" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+         select o.id id,
+                o.type type,
+                o.name name,
+                o.create_time createDate,
+                o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo5" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+         select o.id id,
+                o.type type,
+                o.name name,
+                o.create_time createDate,
+                o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo6" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id ="getDemo7" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo8" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+         select o.id id,
+                o.type type,
+                o.name name,
+                o.create_time createDate,
+                o.update_time updateDate
+from orders o where o.u_Id = #{u_id}
+    </select>
+
+    <select id="getDemo9" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo10" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo11" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo12" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo13" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo14" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo15" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo16" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo17" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo18" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo19" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo20" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo21" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo22" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+
+    <select id="getDemo23" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id =  #{u_id}
+    </select>
+
+    <select id="getDemo24" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+        select o.id id,
+               o.type type,
+               o.name name,
+               o.create_time createDate,
+               o.update_time updateDate
+from orders o where o.u_id = #{u_id}
+    </select>
+</mapper>
