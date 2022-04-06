@@ -69,14 +69,11 @@
             <version>2.2.2</version>
         </dependency>
 
-<<<<<<< HEAD
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
         </dependency>
-=======
->>>>>>> bb024f3a74665c6634e58ba29f7b0265d0574443
     </dependencies>
 
     <build>

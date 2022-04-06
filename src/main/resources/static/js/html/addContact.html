@@ -3,11 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link type="text/css" rel="stylesheet" href="../css/bg1.css"/>
+
     <style type="text/css">
-        *{
-            color:purple;
+
+
+        #title{
+            padding-left: 20px;
+            font-size:30px;
         }
+
+      #abody{
+          padding-left: 20px;
+      }
+
+        #bfoot{
+            left:-12px;
+            position: relative;
+        }
+
+        #bfoot ul li{
+
+          float:left;
+          list-style-type:none;
+          position:relative;
+          width:100px;
+      }
+
     </style>
     <script type="text/javascript" src="../jquery-3.5.1.js"></script>
     <script type="text/javascript">
@@ -87,8 +108,8 @@
     </script>
 </head>
 <body>
-<div><h1>添加联系人</h1></div>
-<div>
+<div id="title">添加联系人</div>
+<div id="abody">
     <table>
         <tr>
             <td>用户名:</td>
@@ -97,9 +118,15 @@
 
 
     </table>
-
-    <button id="addContact">添加联系人</button>
-    <button id="cancel">取消</button>
 </div>
+<div id="bfoot">
+    <ul>
+        <li>  <button id="addContact">添加联系人</button></li>
+        <li> <button id="cancel">取消</button></li>
+    </ul>
+</div>
+
+
+
 </body>
 </html>

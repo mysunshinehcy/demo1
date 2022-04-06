@@ -84,7 +84,7 @@
       position:relative;
       float:left;
       width:120px;
-
+      list-style-type:none;
 
   }
 
@@ -148,6 +148,7 @@
       position:relative;
       float:left;
       width:100px;
+      list-style-type:none;
   }
 
 
@@ -211,12 +212,73 @@
      color:red;
  }
 
+ #delKuang{
+     display:none;
+     z-index:30;
+     position:relative;
+     width:400px;
+     height:300px;
+     background-color: blue;
+     border-radius: 10px;
+
+ }
+
+ #delKuang div:first-child{
+     padding-top:5px;
+     padding-left:5px;
+     padding-bottom:5px;
+     background-color: green;
+ }
+
+  #delCfooter ul li{
+      float:left;
+      position:relative;
+      width:50px;
+      list-style-type:none;
+  }
+
     </style>
 
     <script type="text/javascript">
 
         $(function(){
 
+            $("#sureBtn").click(function(){
+
+                var id = $("#delId").val();
+                var contact_name = $("#usernamedf").val();
+                //alert("id :" + id);
+                $.ajax({
+                    type:'post',
+                    url:"/demo1/contact/delete",
+                    data:{
+                        id:id,
+                        contact_name:contact_name
+                    },
+                    success:function(data){
+                        var data = eval(data);
+                        if(data.code == 1){
+                            $("#delKuang").css("display","none");
+                            $("#shadow").css("display","none");
+                            alert("删除成功");
+                            //查询联系人
+                            findContact();
+                        }else if(data.code == 0){
+                            alert("删除失败");
+                        }else if(data.code == 3){
+                            alert("请重新登陆");
+                            window.location.href="login.html";
+                        }
+
+                    }
+                })
+            })
+
+            $("#cancelBtn").click(function(){
+                $("#delKuang").css("display","none");
+                $("#shadow").css("display","none");
+                }
+            )
             $("#choosePic").click(function(){
                var head_url =  $("#allImages ul li[class='headBN'] ").children("div").children("img").attr("src");
                alert("head_url =" + head_url);
@@ -510,37 +572,15 @@
 
                             $("#tbody tr td input[class='delete']").click(function() {
 
-
-
-                                var contact_name = $(this).parent().prev().prev().prev().html();
-                                var id = $(this).prev().prev().val();
-                                alert("id :" + id);
-                                $.ajax({
-                                    type:'post',
-                                    url:"/demo1/contact/delete",
-                                    data:{
-                                        id:id,
-                                        contact_name:contact_name
-                                    },
-                                    success:function(data){
-                                        var data = eval(data);
-                                        if(data.code == 1){
-                                            alert("删除成功");
-                                            //查询联系人
-                                            findContact();
-                                        }else if(data.code == 0){
-                                            alert("删除失败");
-                                        }else if(data.code == 3){
-                                            alert("请重新登陆");
-                                            window.location.href="login.html";
-                                        }
-
-                                    }
-                                })
-
-
-
-                            })
+                               var contact_name = $(this).parent().prev().prev().prev().html();
+                               var id = $(this).prev().prev().val();
+                               //alert("contact_name =" + contact_name);
+                               //alert("id =" + id);
+                                $("#usernamedf").val(contact_name);
+                                $("#delId").val(id);
+                                $("#delKuang").css("display","block");
+                                $("#shadow").css("display","block");
+                               })
 
 
                             $("#tbody tr td input[class='operation']").click(function() {
@@ -663,7 +703,7 @@
         <li>  <div> <button id="personInfo">个人信息</button></div></li>
         <li><img src=""  id="headI"/></li>
         <li>用户名:<div id="username">aaaa</div></li>
-        <li><div id="exit">退出</div></li>
+        <li><div><button id="exit">退出</button></div></li>
     </ul>
 </div>
 
@@ -716,6 +756,29 @@
     </ul>
 </div>
 </div>
+
+
+<div id="delKuang">
+    <div >删除联系人</div>
+    <div>
+
+            <table>
+                <tr>
+                    <td>用户名:</td>
+                    <td><input id="delId" type="hidden"/>
+                        <input id="usernamedf"/></td>
+                </tr>
+            </table>
+
+    </div>
+    <div id="delCfooter">
+        <ul>
+            <li><div><button id="sureBtn">确认</button></div></li>
+           <li><div><button id="cancelBtn">取消</button></div></li>
+        </ul>
+    </div>
+</div>
+
 
 </body>
 </html>
