@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../css/bg1.css"/>
+    <style type="text/css">
+        *{
+            color:purple;
+        }
+    </style>
+    <script type="text/javascript" src="../jquery-3.5.1.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+
+            $.ajax({
+                type:'post',
+                url:"/demo1/user/getUser",
+                success:function(data){
+                    var data1 = eval(data);
+                    if(data1.code == 0){
+                        alert("请重新登录");
+                        window.location.href="/demo1/js/html/login.html";
+                    }
+                }
+            })
+
+
+
+            $.ajax({
+                type:'post',
+                url:"/demo1/user/findAll",
+                success:function(data){
+                    var data1 = eval(data);
+                    var list = data1.content;
+                    var usernam = $("#username");
+                    for(var i = 0 ; i <list.length ; i ++){
+                       var usr = list[i].username;
+                       var op = "<option>"+usr+"</option>";
+                        usernam.append(op);
+                    }
+                }
+            })
+
+            $("#addContact").click(function(){
+                const username = $("#username").val().trim();
+
+                if(username == ""){
+                    alert("用户名不能为空");
+                    return;
+                }
+
+
+
+                $.ajax({
+                    type:'post',
+                    url:"/demo1/contact/add",
+                    data:{
+                        contact_name: $("#username").val().trim()
+                    },
+                    success:function(data){
+                        console.log("222");
+                        const list = eval(data);
+                        console.log("data.code+"  +list.code);
+                        if(list.code == 1){
+
+                            alert("添加成功");
+                            window.location.href="main.html";
+                        }else if(list.code == 0){
+                            alert("添加失败");
+                        }else if(list.code == 4){
+                            alert("联系人已存在");
+                        }else if(list.code == 3){
+                            alert("请登录");
+                            window.location.href="/demo1/js/html/login.html";
+                        }
+                    }
+                })
+            })
+
+ $("#cancel").click(function(){
+     window.location.href="/demo1/js/html/main.html";
+ })
+
+        })
+    </script>
+</head>
+<body>
+<div><h1>添加联系人</h1></div>
+<div>
+    <table>
+        <tr>
+            <td>用户名:</td>
+            <td><select id="username"></select></td>
+        </tr>
+
+
+    </table>
+
+    <button id="addContact">添加联系人</button>
+    <button id="cancel">取消</button>
+</div>
+</body>
+</html>

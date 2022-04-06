@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../jquery-3.5.1.js"></script>
+    <style type="text/css">
+
+        #all ul li{
+            position:relative;
+            width:200px;
+            float:left;
+        }
+        #head{
+            display:none;
+        }
+
+        #head ul li{
+            position: relative;
+            float:left;
+            width:200px;
+        }
+
+
+        #group{
+            position:absolute;
+            top:80px;
+            left:50px;
+            display:none;
+            z-index:100;
+            background-color:blue;
+            height:300px;
+            width:400px;
+            border-radius: 5px;
+        }
+
+        #shadow{
+            z-index:5;
+            width:600px;
+            height:600px;
+            position:absolute;
+            top:50px;
+            left:30px;
+            display:none;
+            background-color:gray;
+        }
+
+        #g_title{
+            postion:relative;
+            padding-left:5px;
+            padding-top:10px;
+            font-size:12px;
+            padding-bottom:10px;
+
+            background-color:green;
+            color:white;
+        }
+
+        #gbody{
+            padding-left:5px;
+            padding-top:10px;
+        }
+
+  #tbody{
+      width:300px;
+      border:1px solid red;
+  }
+
+  #conte_c table tr td,
+  #conte_c table tr th{
+      width:100px;
+      border:1px solid gray;
+  }
+
+        #myOpe{
+            position:absolute;
+            top:85px;
+            left:10px;
+            width:600px;
+        }
+
+  #myOpe  ul li{
+      position:relative;
+      float:left;
+      width:120px;
+
+
+  }
+
+  #contactT{
+     position:absolute;
+      top:130px;
+      left:50px;
+  }
+
+  #banner{
+     background-image: url("../img/banner7.jpeg");
+      background-repeat: no-repeat;
+      width:500px;
+      height:80px;
+  }
+
+  #headas{
+      z-index:10;
+      width:400px;
+      height:300px;
+      position:absolute;
+      top:80px;
+      left:30px;
+      display:none;
+      background-color:blue;
+      border-radius: 10px;
+  }
+
+  #utas{
+      background-color:green;
+      color:white;
+      padding-top:10px;
+      padding-bottom:20px;
+      padding-left:15px;
+      height:10px;
+      font-size:20px;
+  }
+
+        #update{
+            padding-top:10px;
+           padding-left:10px;
+        }
+
+        #update table tr td{
+      width:100px;
+  }
+
+  #cancelC{
+      position:relative;
+      left:50px;
+
+  }
+
+  #headI{
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+  }
+
+  #banner ul li{
+      position:relative;
+      float:left;
+      width:100px;
+  }
+
+
+  #personInfodf{
+      z-index:10;
+      background-color:blue;
+      position:relative;
+      top:100px;
+      left:100px;
+      display:none;
+      height:300px;
+      width:300px;
+  }
+
+
+.touc{
+    border-radius: 50%;
+    width:10px;
+    height:20px;
+}
+        #allImages{
+            width:200px;
+        }
+        #allImages ul li{
+            width:50px;
+        }
+        .headBN{
+
+    border:3px solid blue;
+}
+.othHead {
+
+    width:50px;
+    height:50px;
+}
+
+#allImages{
+    z-index:10;
+    position:relative;
+    background-color:green;
+    top:50px;
+    left:50px;
+    display:none;
+}
+
+ #btnfooter ul li{
+     float:left;
+     position:relative;
+     width:50px;
+     list-style-type:none;
+
+ }
+
+ #addGrou ul li{
+      float:left;
+     position:relative;
+     list-style-type:none;
+     width:50px;
+ }
+ .red {
+     color:red;
+ }
+
+    </style>
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            $("#choosePic").click(function(){
+               var head_url =  $("#allImages ul li[class='headBN'] ").children("div").children("img").attr("src");
+               alert("head_url =" + head_url);
+               $("#updateHAS").attr("src",head_url);
+               $("#allImages").css("display","none");
+            })
+
+            $("#allImages ul li ").click(function(){
+                     if($(this).hasClass("headBN")){
+                         $(this).removeClass("headBN");
+
+                     }else{
+                         $(this).addClass("headBN");
+                         $(this).siblings("li").removeClass("headBN");
+                     }
+
+            })
+
+
+            findContact();
+            $("#choosePicA").click(function(){
+
+                $("#allImages").css("display","block");
+            })
+
+            $("#cancelPic").click(function(){
+                $("#allImages").css("display","none");
+            })
+
+            $(".updateCon").click(function(){
+                console.log("niss");
+            })
+
+
+            $("#addContact").click(function(){
+                window.location.href="addContact.html";
+            })
+
+          $("#exit").click(function(){
+            $.ajax({
+                type:'post',
+                url:"/demo1/user/logout",
+                success:function(data){
+                    window.location.href="/demo1/js/html/login.html";
+                }
+            })
+          })
+
+        $("#addGroup").click(function(){
+
+            $("#group").css("display","block");
+            $("#shadow").css("display","block");
+        })
+
+            $("#cancelG").click(function(){
+                $("#group").css("display","none");
+                $("#shadow").css("display","none");
+            })
+
+            $("#add").click(function(){
+
+
+                $.ajax({
+                    type:'post',
+                    url:"/demo1/group/add",
+                    data:{
+                        group_name:$("#groupName").val()
+                    },
+                    success:function(data){
+                        var data1 = eval(data);
+                        if(data1.code == 3){
+                            alert("请重新登录");
+                            window.location.href="/demo1/js/html/login.html";
+                        }else if(data1.code == 1){
+                            alert("添加成功");
+
+                        }else if(data1.code == 0){
+                            alert("添加失败");
+                        }if(data1.code == 4){
+                            alert("分组已经存在");
+                        }
+                    }
+                })
+            })
+
+
+            $("#addGs").click(function(){
+                var groupName = $("#groupName").val().trim();
+                if(groupName.length == 0){
+                    alert("分组名称不能为空");
+                    return;
+                }
+                $.ajax({
+                    type:'post',
+                    url:"/demo1/group/add",
+                    data:{
+                        group_name:$("#groupName").val()
+                    },
+                    success:function(data){
+
+                        var data1 = eval(data);
+                        if(data1.code == 1){
+                            $("#shadow").css("display","none");
+                            $("#group").css("display","none");
+                            alert("添加成功");
+                        }else if(data1.code == 0){
+                            alert("添加失败");
+                        }else if(data1.code == 3){
+                            alert("请重新登录");
+                            window.location.href="/demo1/js/html/login.html";
+                        }else if(data1.code == 4){
+                            alert("分组已经存在");
+                        }else if(data1.code == 5){
+                            alert("分组名称不能为空");
+                        }
+                    }
+                })
+            })
+
+
+          $("#updateContact").click(function(){
+
+
+              $.ajax({
+                  type:'post',
+                  url:"/demo1/contact/update",
+                  data:{
+                      id:$("#ccid").val(),
+                      group_id: $("#group_names").val(),
+                      remark_name:$("#nick_names").val()
+                  },
+                  success:function(data){
+                     var data1 = eval(data);
+                     if(data1.code =  1){
+                         alert("修改成功");
+                         findContact();
+                         $("#shadow").css("display","none");
+                         $("#headas").css("display","none");
+                     }else{
+                         alert("修改失败");
+
+                     }
+
+                  }
+              })
+
+
+
+
+          })
+
+            $("#cancelC").click(function(){
+                $("#headas").css("display","none");
+                $("#shadow").css("display","none");
+            })
+
+
+            $("#personInfo").click(function(){
+
+                $("#personInfodf").css("display","block");
+                $("#shadow").css("display","block");
+                $.ajax({
+                    type:'post',
+                    url:"/demo1/image/findAll",
+                    success:function(data){
+                        var data = eval(data);
+                        if(data.code == 3){
+                            alert("请重新登陆");
+                            window.location.href="login.html";
+                        }else if(data.code == 1){
+                            var map = data.result;
+                            var user = map.user;
+                            var list = map.list;
+                            $("#userN").val(user.username);
+
+                            //覆盖图片信息
+                            var image_urlS = $("#image_url");
+                            image_urlS.empty();
+                            var user_image = user.head_img;
+                            for(var i = 0 ; i < list.length ; i ++){
+                                var image = list[i].img_url;
+                                if(user_image == image){
+                                    var option = $("<option value='"+image+"' selected><img src='"+image+"' class='touc'/></option>");
+                                }else{
+                                    var option = $("<option value='"+image+"'><img src='"+image+"' class='touc'/></option>");
+                                }
+                                image_urlS.append(option);
+                            }
+
+
+
+
+                        }
+                    }
+                })
+
+
+            })
+
+
+            $("#sureasd").click(function(){
+
+                $.ajax({
+                    type:'post',
+                    url:"/demo1/user/update",
+                    data:{
+                        head_img:$("#updateHAS").attr("src")
+                    },
+                    success:function(data){
+                       var data = eval(data);
+                       if(data.code == 3){
+                           alert("请重新登陆");
+                           window.location.href="login.html";
+                       }else if(data.code == 1){
+                           alert("修改成功");
+                           findContact();
+                       }
+                    }
+
+
+                })
+
+                $("#personInfodf").css("display","none");
+                $("#shadow").css("display","none");
+            })
+
+            $("#cance").click(function(){
+                $("#personInfodf").css("display","none");
+                $("#shadow").css("display","none");
+            })
+
+        })
+
+
+        function findContact(){
+
+            $.ajax({
+                type:'post',
+                url:"/demo1/contact/find",
+                success:function(data){
+
+
+                    const list = eval(data);
+
+                    if(list.code == 3){
+                        alert("请重新登陆");
+                        window.location.href="login.html";
+                    }else{
+                        var user = list.result.user;
+                        $("#username").text(user.username);
+                        $("#headI").attr("src",user.head_img);
+
+                        const content = $("#tbody");
+                        content.empty();
+                        const cData = list.result.contact;
+
+                        for(var i = 0 ; i < cData.length ; i ++){
+                            var contact_name = cData[i].contact_name;
+                            var remark_name = cData[i].remark_name;
+                            var group_name = cData[i].group_name;
+
+                            var tr = $("<tr></tr>");
+                            var td1 = $("<td>"+contact_name+"</td>");
+                            var td2 = $("<td><input value='"+remark_name+"' type='text'/></td>");
+
+
+                            var listG = data.result.group;
+
+                            var select =  $("#group_names");
+
+                            for(var j= 0 ; j < listG.length ; j ++){
+                                var gid = listG[j].id;
+                                var gname = listG[j].group_name;
+                                var option = "<option value='"+gid+"'v>"+gname+"</option>";
+                                if(gname == group_name){
+                                    option = "<option value='"+gid+"'v selected>"+gname+"</option>";
+                                }
+
+                                select.append(option);
+                            }
+
+
+                            var td3 = $("<td>"+group_name+"</td>");
+
+                            var td4 = $("<td><input type='hidden' value='"+cData[i].id+"'/>" +
+                                "<input type='button' class='operation' name='ope' value='修改'/>" +
+                                "<input type='button' class='delete' value='删除'/></td>");
+                            tr.append(td1).append(td2).append(td3).append(td4);
+                            content.append(tr);
+
+
+                            $("#tbody tr td input[class='delete']").click(function() {
+
+
+
+                                var contact_name = $(this).parent().prev().prev().prev().html();
+                                var id = $(this).prev().prev().val();
+                                alert("id :" + id);
+                                $.ajax({
+                                    type:'post',
+                                    url:"/demo1/contact/delete",
+                                    data:{
+                                        id:id,
+                                        contact_name:contact_name
+                                    },
+                                    success:function(data){
+                                        var data = eval(data);
+                                        if(data.code == 1){
+                                            alert("删除成功");
+                                            //查询联系人
+                                            findContact();
+                                        }else if(data.code == 0){
+                                            alert("删除失败");
+                                        }else if(data.code == 3){
+                                            alert("请重新登陆");
+                                            window.location.href="login.html";
+                                        }
+
+                                    }
+                                })
+
+
+
+                            })
+
+
+                            $("#tbody tr td input[class='operation']").click(function() {
+
+                                var contact_name = $(this).parent().prev().prev().prev().html();//用户名
+
+                                //昵称
+                                var nick_name = $(this).parent().prev().prev().children("input").val();
+                                //alert("nick_name:"+ nick_name);
+                                $("#ccid").val($(this).prev().val());
+                                $("#cusername").val(contact_name);
+
+                                $("#nick_names").val(nick_name);
+                                $("#headas").css("display","block");
+                                $("#shadow").css("display","block");
+
+
+                                $(this).css("background-color","green");
+
+                            })
+
+                        }
+                    }
+
+
+                }
+
+
+            })
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+<div  id="personInfodf">
+    <div>修改个人信息</div>
+    <div>
+        <table>
+            <tr>
+                <td>用户名:</td>
+                <td><input id="userN" readonly/></td>
+            </tr>
+            <tr>
+                <td>头像:</td>
+                <td><img src="" id="updateHAS" class="othHead"/></td>
+            </tr>
+            <tr>
+                <td><button id="choosePicA">选择头像</button></td>
+
+            </tr>
+            <tr>
+                <td><button id="sureasd">确认</button></td>
+                <td><button id="cance">取消</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="allImages">
+
+    <div>
+    <ul>
+        <li class=" headBN" ><div class=""/><img src="/demo1/js/img/head_img.jpeg" class="othHead " /></div></li>
+        <li ><div class=""/><img src="/demo1/js/img/head_img2.jpeg" class="othHead " ></div></li>
+<li ><div class=""/><img src="/demo1/js/img/head_img3.jpeg" class="othHead " ></div></li>
+<li  ><div class=""/><img src="/demo1/js/img/head_img4.jpeg" class="othHead " ></div></li>
+    </ul>
+    </div>
+    <div>
+        <button id="choosePic">选择</button>
+        <button id="cancelPic">取消</button>
+    </div>
+
+</div>
+
+
+<div id="shadow"></div>
+<div id="headas">
+
+    <div id="utas">修改联系人</div>
+    <div id="update">
+      <table>
+          <tr>
+
+              <td>用户名:</td>
+              <td>
+                  <input id="ccid" type="hidden"/>
+                  <input type="input" id="cusername"/>
+              </td>
+          </tr>
+          <tr>
+              <td>分组:</td>
+              <td ><select id="group_names"></select></td>
+          </tr>
+          <tr>
+              <td>昵称:</td>
+              <td><input id="nick_names"/></td>
+          </tr>
+      </table>
+    </div>
+    <div id="btnfooter">
+        <ul>
+            <li> <div><input type="button" value="确认" id="updateContact"/></div></li>
+            <li> <div><input type="button" value="取消" id="cancelC"/></div></li>
+        </ul>
+
+
+    </div>
+
+
+</div>
+
+<div id="banner">
+
+    <ul>
+        <li>  <div> <button id="personInfo">个人信息</button></div></li>
+        <li><img src=""  id="headI"/></li>
+        <li>用户名:<div id="username">aaaa</div></li>
+        <li><div id="exit">退出</div></li>
+    </ul>
+</div>
+
+
+<div id="myOpe">
+    <ul>
+    <li><div><button id="addContact">添加联系人</button></div></li>
+    <li><div><button id="addGroup">新建分组</button></div></li>
+
+    </ul>
+</div>
+
+
+<div id="contactT">
+<div>联系人列表</div>
+<div id="conte_c" >
+<table >
+<thead>
+<tr>
+
+    <th>用户名</th>
+    <th>昵称</th>
+    <th>group name</th>
+    <th>选择</th>
+</tr>
+</thead>
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+</div>
+</div>
+
+<div id="group">
+    <div id="g_title">新建分组</div>
+    <div id="gbody">
+  <table>
+      <tr>
+          <td>分组名称:</td>
+          <td><input id="groupName"/><span class="red">*</span></td>
+      </tr>
+
+
+  </table>
+    </div>
+<div id="addGrou">
+    <ul>
+        <li><div><button id="addGs">添加</button></div></li>
+        <li><div><button id="cancelG">取消</button></div></li>
+    </ul>
+</div>
+</div>
+
+</body>
+</html>

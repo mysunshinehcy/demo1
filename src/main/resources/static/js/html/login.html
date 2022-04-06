@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../css/bg1.css"/>
+    <script type="text/javascript" src="../jquery-3.5.1.js"></script>
+    <style type="text/css">
+       #mycont{
+           position:relative;
+           top:300px;
+           left:300px;
+
+       }
+       body{
+           background-image: url("../img/backgroun-1.jpeg") ;
+           background-repeat: no-repeat;
+       }
+    </style>
+    <script type="text/javascript">
+
+        $(function(){
+            $("#login").click(function(){
+
+                $.ajax({
+                    type:'post',
+                    url:"/demo1/user/login",
+                    data:{
+                        username: $("#username").val(),
+                        password:$("#password").val()
+                    },
+                    success:function(data){
+
+                      const list = eval(data);
+                      console.log("data.code+"  +list.code);
+                       if(data.code == 1){
+                           window.location.href="main.html";
+                       }else{
+                           alert("用户名或密码错误");
+                       }
+                    }
+                })
+            })
+
+            $("#register").click(function(){
+                  window.location.href="register.html";
+            })
+        })
+    </script>
+</head>
+<body id="mybody">
+<div><h1>登录</h1></div>
+<div id="mycont">
+<table>
+    <tr>
+        <td>用户名:</td>
+        <td><input id="username"/></td>
+    </tr>
+    <tr>
+        <td>密码:</td>
+        <td><input id="password"/></td>
+    </tr>
+</table>
+<button id="login">登录</button>
+<button id="register">注册</button>
+</div>
+</body>
+</html>
