@@ -1,12 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.bean.Order;
+import com.example.demo.util.Pagenation;
 
 import java.util.List;
 
 public interface RestService {
-    public List<Order> getDemo1(Order order);
-   public List<Order> getDemo2(Order order);
+    public List<Order> getDemo1(Pagenation  pagenation);
+   public List<Order> getDemo2(Pagenation  pagenation);
    public List<Order> getDemo3(Order order);
    public List<Order> getDemo4(Order order);
    public List<Order> getDemo5(Order order);

@@ -6,22 +6,24 @@
 <!-- mapper标签要指定namespace属性，不然会报错，可看做包名-->
 <mapper namespace="com.example.demo.mapper.RestMapper">
 
-    <select id="getDemo1"  resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">
+    <select id="getDemo1"  resultType="com.example.demo.bean.Order" parameterType="com.example.demo.util.Pagenation">
         select o.id  id,
                o.type   type,
                o.name name,
+               o.u_id u_id,
                o.create_time createDate,
                o.update_time updateDate
-        from orders o where o.u_id = #{u_id}
+        from orders o  order by createDate desc   limit  #{startIndex},  #{pageSize}
     </select>
 
-    <select id="getDemo2" resultType="com.example.demo.bean.Order"  parameterType="com.example.demo.bean.Order">
+    <select id="getDemo2" resultType="com.example.demo.bean.Order"  parameterType="com.example.demo.util.Pagenation">
         select o.id id,
                o.type type,
                o.name name,
+               o.u_id u_id,
                o.create_time createDate,
                o.update_time updateDate
-             from orders o where o.u_id = #{u_id}
+             from orders o  order by createDate desc   limit #{startIndex},#{pageSize}
     </select>
 
     <select id="getDemo3" resultType="com.example.demo.bean.Order" parameterType="com.example.demo.bean.Order">

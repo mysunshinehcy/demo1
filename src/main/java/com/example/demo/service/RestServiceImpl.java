@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.bean.Order;
 import com.example.demo.mapper.RestMapper;
+import com.example.demo.util.Pagenation;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,15 +14,15 @@ public class RestServiceImpl implements  RestService{
     @Resource
     RestMapper restMapper;
     @Override
-    public List<Order> getDemo1(Order order) {
+    public List<Order> getDemo1(Pagenation pagenation) {
         System.out.println("demo1 service");
-        return restMapper.getDemo1(order);
+        return restMapper.getDemo1(pagenation);
     }
 
     @Override
-    public List<Order> getDemo2(Order order) {
+    public List<Order> getDemo2(Pagenation pagenation) {
         System.out.println("demo2 service");
-        return restMapper.getDemo2(order);
+        return restMapper.getDemo2(pagenation);
     }
 
     @Override
