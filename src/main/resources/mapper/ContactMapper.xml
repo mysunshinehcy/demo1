@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper标签要指定namespace属性，不然会报错，可看做包名-->
+<mapper namespace="com.example.demo.mapper.ContactMapper">
+
+
+    <select id="findByUser" resultType="com.example.demo.bean.Contact">
+        select id id,
+               contact_name contact_name,
+               remark_name remark_name,
+               group_name group_name
+       from contact where u_id = #{id}
+       order by group_name desc
+    </select>
+
+    <insert id="add" >
+        insert into contact
+(contact_name,create_time,update_time,u_id)
+values(#{contact_name},#{createTime},#{updateTime},#{u_id})
+    </insert>
+
+
+    <update id="update" >
+        update contact
+set group_name = #{group_name},
+    remark_name = #{remark_name}
+where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from contact
+        where contact_name = #{contact_name}
+             and u_id = #{user_id}
+    </delete>
+
+    <select id="findContact" resultType="com.example.demo.bean.Contact">
+        select id id,
+               contact_name contact_name,
+               u_id u_id
+from contact where u_id = #{u_id} and contact_name = #{contact_name}
+    </select>
+</mapper>

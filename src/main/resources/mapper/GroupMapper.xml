@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper标签要指定namespace属性，不然会报错，可看做包名-->
+<mapper namespace="com.example.demo.mapper.GroupMapper">
+
+    <insert id="add">
+        insert into groups_user
+            (group_name,u_id,create_time,update_time)
+        values(#{group_name},#{u_id},#{createTime},#{updateTime})
+    </insert>
+
+
+    <select id="findAll" resultType="com.example.demo.bean.Group">
+
+select id id,
+       group_name group_name,
+       u_id u_id
+from groups_user where u_id = #{id}
+    </select>
+
+    <select id="findMo" resultType="com.example.demo.bean.Group">
+        select group_name
+from groups_user where u_id = #{id}  and group_name like "%goodfriend%"
+    </select>
+
+    <select id="findGroup" resultType="com.example.demo.bean.Group">
+        select id id,
+               u_id u_id,
+               group_name group_name
+from groups_user where u_id = #{u_id}
+  and group_name = #{group_name}
+
+    </select>
+
+
+    <select id="findByGroupId" resultType="com.example.demo.bean.Group">
+        select id id,
+               group_name group_name
+from groups_user where id = #{id}
+    </select>
+</mapper>
